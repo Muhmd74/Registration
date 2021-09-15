@@ -3,7 +3,7 @@ using System;
 using System.Threading.Tasks;
 using Registration.Core.Dtos.Request;
 using Registration.Core.Entities;
- using Registration.Core.Interfaces.BaseInterfaces;
+using Registration.Core.Interfaces.BaseInterfaces;
 
 namespace Registration.Api.Controllers
 {
@@ -84,6 +84,17 @@ namespace Registration.Api.Controllers
         public async Task<IActionResult> GetById([FromQuery] Guid id)
         {
             var result = await _unitOfWork.Addresses.GetById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+        [HttpGet(Routers.Router.Address.Details)]
+        public async Task<IActionResult> Details([FromQuery] Guid id)
+        {
+            var result = await _unitOfWork.Addresses.Details(id);
             if (result.Success)
             {
                 return Ok(result);

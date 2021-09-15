@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Registration.Core.Common.Response;
 using Registration.Core.Dtos.Request;
+using Registration.Core.Dtos.Response;
 using Registration.Core.Entities;
 using Registration.Core.Interfaces.BaseInterfaces;
 
@@ -13,5 +14,7 @@ namespace Registration.Core.Interfaces
     {
         Task<OutputResponseForValidationFilter> AddAddress(AddressRequest model);
         Task<OutputResponse<bool>> IsDefault(Guid id,Guid customerId);
+        Task<OutputResponse<AddressDetailsResponse>> Details(Guid id);
+
     }
 }

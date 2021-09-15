@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Registration.Core.Entities
+namespace Registration.Core.Dtos.Response
 {
-    public class Address
+    public class AddressDetailsResponse
     {
         public Guid Id { get; set; }
         public string Location { get; set; }
@@ -11,7 +13,5 @@ namespace Registration.Core.Entities
         public int PostalCode { get; set; }
         public string Note { get; set; }
         public bool IsDefault { get; set; }
-        public Guid CustomerId { get; set; }
-        public Customer Customer { get; set; }
     }
 }

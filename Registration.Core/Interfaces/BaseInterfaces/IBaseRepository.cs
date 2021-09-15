@@ -13,8 +13,6 @@ namespace Registration.Core.Interfaces.BaseInterfaces
         Task<OutputResponse<bool>> Delete(T entity);
         Task<OutputResponse<IEnumerable<T>>> GetAll(int take=Int32.MaxValue);
         Task<OutputResponse<T>> GetById(Guid id);
-        OutputResponse<T> Details(Expression<Func<T, bool>> match, string[] includes = null);
-
         Task<OutputResponse<IEnumerable<T>>> GetAllActive(Expression<Func<T, bool>> match, Expression<Func<T, object>> orderBy = null, int take = Int32.MaxValue
 
         );

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Registration.Core.Common.Response;
 using Registration.Core.Dtos.Request;
+using Registration.Core.Dtos.Response;
 using Registration.Core.Entities;
 using Registration.Core.Interfaces;
 using Registration.Infrastructure.BaseRepository;
@@ -90,6 +91,34 @@ namespace Registration.Infrastructure.Repositories.Addresses
             return new OutputResponse<bool>()
             {
                 Model = false,
+                Success = false,
+                Message = ResponseMessages.Failure
+            };
+        }
+
+        public async Task<OutputResponse<AddressDetailsResponse>> Details(Guid id)
+        {
+            var model = await _context.Addresses.FirstOrDefaultAsync(d => d.Id == id);
+             if (model != null)
+            {
+                 return new OutputResponse<AddressDetailsResponse>()
+                {
+                    Model = new AddressDetailsResponse()
+                    {
+                        IsDefault = model.IsDefault,
+                        CityName = model.CityName,
+                        CountryName = model.CountryName,
+                        Location = model.Location,
+                        Note = model.Note,
+                        PostalCode = model.PostalCode
+                    },
+                    Success = true,
+                    Message = ResponseMessages.Success
+                };
+            }
+            return new OutputResponse<AddressDetailsResponse>()
+            {
+                Model = null,
                 Success = false,
                 Message = ResponseMessages.Failure
             };

@@ -30,6 +30,8 @@
             public const string IsDefault = Prefix + "is-default";
             public const string GetAll = Prefix + "get-all";
             public const string GetById = Prefix + "get-by-id";
+            public const string Details = Prefix + "details";
+
         }
 
     }

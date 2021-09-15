@@ -98,9 +98,9 @@ namespace Registration.Api.Controllers
             return BadRequest(result);
         }
         [HttpGet(Routers.Router.Customer.Details)]
-        public IActionResult Details([FromQuery] Guid id)
+        public async Task<IActionResult> Details([FromQuery] Guid id)
         {
-            var result = _unitOfWork.Customers.Details(d => d.Id == id, new[] { "addresses" });
+            var result = await _unitOfWork.Customers.Details(id);
             if (result.Success)
             {
                 return Ok(result);
