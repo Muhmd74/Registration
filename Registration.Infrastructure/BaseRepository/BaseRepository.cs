@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Registration.Core.Common.Response;
-using Registration.Core.Const;
-using Registration.Core.Interfaces;
+using Registration.Core.Interfaces.BaseInterfaces;
 using Registration.Infrastructure.Common.Response;
 using Registration.Infrastructure.Data.ApplicationDbContext;
 
@@ -22,13 +20,13 @@ namespace Registration.Infrastructure.BaseRepository
             _context = context;
         }
 
-        public async Task<OutputResponse<T>> Add(T entity)
+        public async Task<OutputResponseForValidationFilter> Add(T entity)
         {
             try
             {
                 var model = await _context.Set<T>().AddAsync(entity);
                 await _context.SaveChangesAsync();
-                return new OutputResponse<T>()
+                return new OutputResponseForValidationFilter()
                 {
                     Model = entity,
                     Success = true,
@@ -37,7 +35,7 @@ namespace Registration.Infrastructure.BaseRepository
             }
             catch (Exception e)
             {
-                return new OutputResponse<T>()
+                return new OutputResponseForValidationFilter()
                 {
                     Model = null,
                     Success = false,
@@ -153,9 +151,9 @@ namespace Registration.Infrastructure.BaseRepository
 
         }
 
-        public async Task<OutputResponse<IEnumerable<T>>> GetAll(int take=Int32.MaxValue,int skip=Int32.MaxValue)
+        public async Task<OutputResponse<IEnumerable<T>>> GetAll(int take = Int32.MaxValue)
         {
-            var model = await _context.Set<T>().Take(take).Skip(skip).ToListAsync();
+            var model = await _context.Set<T>().Take(take).ToListAsync();
             return new OutputResponse<IEnumerable<T>>()
             {
                 Model = model,
@@ -241,11 +239,10 @@ namespace Registration.Infrastructure.BaseRepository
 
 
 
-        public async Task<OutputResponse<IEnumerable<T>>> GetAllActive(Expression<Func<T, bool>> match, Expression<Func<T, object>> orderBy = null, int take = Int32.MaxValue, int skip = Int32.MaxValue)
+        public async Task<OutputResponse<IEnumerable<T>>> GetAllActive(Expression<Func<T, bool>> match, Expression<Func<T, object>> orderBy = null, int take = Int32.MaxValue)
         {
             var model = await _context.Set<T>().Where(match)
                 .Take(take)
-                .Skip(skip)
                 .OrderBy(orderBy)
                 .ToListAsync();
             return new OutputResponse<IEnumerable<T>>()

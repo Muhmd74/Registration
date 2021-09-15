@@ -8,6 +8,7 @@ using Registration.Core.Common.Files;
 using Registration.Core.Dtos.Request;
 using Registration.Core.Entities;
 using Registration.Core.Interfaces;
+using Registration.Core.Interfaces.BaseInterfaces;
 
 namespace Registration.Api.Controllers
 {
@@ -63,9 +64,9 @@ namespace Registration.Api.Controllers
             return BadRequest(result);
         }
         [HttpGet(Routers.Router.Customer.GetAll)]
-        public async Task<IActionResult> GetAll(int take, int skip)
+        public async Task<IActionResult> GetAll(int take)
         {
-            var result = await _unitOfWork.Customers.GetAll( take, skip);
+            var result = await _unitOfWork.Customers.GetAll( take);
             if (result.Success)
             {
                 return Ok(result);
@@ -86,9 +87,9 @@ namespace Registration.Api.Controllers
         }
 
         [HttpGet(Routers.Router.Customer.GetAllActive)]
-        public async Task<IActionResult> GetAllActive([FromQuery] int take,int skip)
+        public async Task<IActionResult> GetAllActive([FromQuery] int take)
         {
-            var result = await _unitOfWork.Customers.GetAllActive(d => d.IsActive,d=>d.DateTime,take,skip);
+            var result = await _unitOfWork.Customers.GetAllActive(d => d.IsActive,d=>d.DateTime,take);
             if (result.Success)
             {
                 return Ok(result);

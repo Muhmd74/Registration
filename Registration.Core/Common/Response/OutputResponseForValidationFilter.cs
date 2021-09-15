@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Registration.Infrastructure.Common.Response
+namespace Registration.Core.Common.Response
 {
    public class OutputResponseForValidationFilter
     {

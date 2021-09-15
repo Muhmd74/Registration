@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Registration.Core.Entities
+namespace Registration.Core.Dtos.Request
 {
-    public class Address
+    public class AddressRequest
     {
-        public Guid? Id { get; set; }
         public string Location { get; set; }
         public string CityName { get; set; }
         public string CountryName { get; set; }
@@ -12,6 +13,5 @@ namespace Registration.Core.Entities
         public string Note { get; set; }
         public bool IsDefault { get; set; }
         public Guid CustomerId { get; set; }
-        public Customer Customer { get; set; }
     }
 }

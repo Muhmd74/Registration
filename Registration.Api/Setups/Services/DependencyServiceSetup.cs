@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Registration.Api.Setups.Factory.Services;
 using Registration.Core.Common.Files;
 using Registration.Core.Interfaces;
+using Registration.Core.Interfaces.BaseInterfaces;
 using Registration.Infrastructure.UnitOfWork;
 
 namespace Registration.Api.Setups.Services

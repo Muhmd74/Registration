@@ -9,10 +9,9 @@ using Registration.Core.Interfaces.BaseInterfaces;
 
 namespace Registration.Core.Interfaces
 {
-    public interface ICustomerRepository : IBaseRepository<Customer>
+    public interface IAddressRepository : IBaseRepository<Address>
     {
-        Task<OutputResponse<bool>> ChangeActivity(Guid id);
-
-        Task<OutputResponse<bool>> UploadImage(CustomerImageRequest model);
+        Task<OutputResponseForValidationFilter> AddAddress(AddressRequest model);
+        Task<OutputResponse<bool>> IsDefault(Guid id,Guid customerId);
     }
 }

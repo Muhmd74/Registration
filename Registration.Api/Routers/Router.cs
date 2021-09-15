@@ -19,8 +19,17 @@
             public const string GetById = Prefix + "get-by-id";
             public const string GetAllActive = Prefix + "get-all-active";
             public const string Details = Prefix + "details";
+        }
 
-
+        public  static class Address
+        {
+            private const string Prefix = Root + "address/";
+            public const string Create = Prefix + "create";
+            public const string Delete = Prefix + "delete";
+            public const string Update = Prefix + "update";
+            public const string IsDefault = Prefix + "is-default";
+            public const string GetAll = Prefix + "get-all";
+            public const string GetById = Prefix + "get-by-id";
         }
 
     }
