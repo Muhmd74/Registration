@@ -20,24 +20,24 @@ namespace Registration.Infrastructure.BaseRepository
             _context = context;
         }
 
-        public async Task<OutputResponseForValidationFilter> Add(T entity)
+        public async Task<OutputResponse<bool>> Add(T entity)
         {
             try
             {
                 var model = await _context.Set<T>().AddAsync(entity);
                 await _context.SaveChangesAsync();
-                return new OutputResponseForValidationFilter()
+                return new OutputResponse<bool>()
                 {
-                    Model = entity,
+                    Model = true,
                     Success = true,
                     Message = ResponseMessages.Success
                 };
             }
             catch (Exception e)
             {
-                return new OutputResponseForValidationFilter()
+                return new OutputResponse<bool>()
                 {
-                    Model = null,
+                    Model = true,
                     Success = false,
                     Message = e.Message,
                     Errors = new List<ErrorModel>()

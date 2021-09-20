@@ -8,7 +8,7 @@ namespace Registration.Core.Interfaces.BaseInterfaces
 {
     public interface IBaseRepository<T> where T : class
     {
-        Task<OutputResponseForValidationFilter> Add(T entity);
+        Task<OutputResponse<bool>> Add(T entity);
         Task<OutputResponse<T>> Update(T entity);
         Task<OutputResponse<bool>> Delete(T entity);
         Task<OutputResponse<IEnumerable<T>>> GetAll(int take=Int32.MaxValue);

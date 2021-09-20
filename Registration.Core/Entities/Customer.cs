@@ -17,7 +17,7 @@ namespace Registration.Core.Entities
         public bool IsActive { get; set; }
         public string ImageUrl { get; set; }
         public DateTime Dob { get; set; }
-         public ICollection<Address> Addresses { get; set; }
+         public ICollection<Address> Addresses { get; private set; }
         public DateTime DateTime { get; set; }
 
 

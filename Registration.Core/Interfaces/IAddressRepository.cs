@@ -12,7 +12,7 @@ namespace Registration.Core.Interfaces
 {
     public interface IAddressRepository : IBaseRepository<Address>
     {
-        Task<OutputResponseForValidationFilter> AddAddress(AddressRequest model);
+        Task<OutputResponse<bool>> AddAddress(AddressRequest model);
         Task<OutputResponse<bool>> IsDefault(Guid id,Guid customerId);
         Task<OutputResponse<AddressDetailsResponse>> Details(Guid id);
 

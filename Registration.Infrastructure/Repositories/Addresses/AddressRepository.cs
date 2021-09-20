@@ -24,7 +24,7 @@ namespace Registration.Infrastructure.Repositories.Addresses
             _context = context;
         }
 
-        public async Task<OutputResponseForValidationFilter> AddAddress(AddressRequest model)
+        public async Task<OutputResponse<bool>> AddAddress(AddressRequest model)
         {
             try
             {
@@ -37,16 +37,16 @@ namespace Registration.Infrastructure.Repositories.Addresses
                     Note = model.Note,
                     PostalCode = model.PostalCode
                 });
-                return new OutputResponseForValidationFilter()
+                return new OutputResponse<bool>()
                 {
-                    Model = model,
+                    Model = true,
                     Success = true,
                     Message = ResponseMessages.Success
                 };
             }
             catch (Exception e)
             {
-               return new OutputResponseForValidationFilter()
+               return new OutputResponse<bool>()
                {
                    Model = false,
                    Success = false,
