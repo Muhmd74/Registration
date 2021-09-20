@@ -7,7 +7,7 @@ namespace Registration.Core.Entities
 {
     public class Customer
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public GenderType Gender { get; set; }
