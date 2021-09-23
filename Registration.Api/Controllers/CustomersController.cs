@@ -64,9 +64,9 @@ namespace Registration.Api.Controllers
             return BadRequest(result);
         }
         [HttpGet(Routers.Router.Customer.GetAll)]
-        public async Task<IActionResult> GetAll(int take)
+        public async Task<IActionResult> GetAll()
         {
-            var result = await _unitOfWork.Customers.GetAll( take);
+            var result = await _unitOfWork.Customers.GetAll(12);
             if (result.Success)
             {
                 return Ok(result);

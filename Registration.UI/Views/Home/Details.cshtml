@@ -1,0 +1,84 @@
+﻿@model Registration.Core.Common.Response.OutputResponse<CustomerDetailsResponse>
+
+@{
+    {
+        ViewData["Title"] = "Customer Details";
+    }
+}
+<h2 style="text-align: center">Customer Details</h2>
+<hr style="margin: auto; width: 50%" />
+<div class="row mt-60-px">
+    <div class="col-md-4" style="border: 2px solid brown; border-radius: 5px; ">
+        <img src="@Url.Content(Model.Model.ImageUrl)" alt="IMAGES" />
+    </div>
+    <div class="col-md-7 justify-content-between">
+        <div>
+            <h3 style="margin: 20px 0">@Model.Model.FirstName @Model.Model.LastName</h3>
+        </div>
+        <div class="text-justify mr-4" style="display: block ">
+            <h6 style="margin : 8px 10px 6px 0;display: inline-block">Mobile :</h6>@Model.Model.Mobile
+        </div>
+        <div class="text-muted  mr-4" style="display: block ">
+            <h6 style="margin : 8px 10px 6px 0;display: inline-block">Dob :</h6> @Model.Model.Dob
+        </div>
+        <div class="text-muted  mr-4" style="display: block ">
+            <h6 style="margin : 8px 10px 6px 0;display: inline-block">Email :</h6> @Model.Model.Email
+        </div>
+        <div class="text-muted  mr-4" style="display: block ">
+            <h6 style="margin : 8px 10px 6px 0 ;display: inline-block">Gender :</h6> @Model.Model.Gender.ToString()
+        </div>
+        <div class="mt-4 "style="margin-top: 10px">
+
+
+            <table class="table table-striped">
+                <thead>
+                <thead>
+                <tr>
+                    <th>Country</th>
+                    <th>City</th>
+                    <th>Location</th>
+                    <th>PostalCode</th>
+                    <th>Note</th>
+                    <th>Default</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in @Model.Model.Addresses)
+                {
+                    <tr>
+                        <td>@item.CountryName</td>
+                        <td>@item.CityName</td>
+                        <td>@item.Location</td>
+                        <td>@item.PostalCode</td>
+                        <td>@item.Note</td>
+                        <td>
+                            @if (item.IsDefault)
+                            {
+                                <a href="@Url.Action("IsDefault", "Home", new {id = item.Id , customerId =@Model.Model.Id})" class="btn btn-success" style="margin-left: 4px">
+                                    <i class="bi bi-skip-backward" style="margin-right: 5px"></i>
+                                    Default
+                                </a>
+                            }
+                            else
+                            {
+                                
+                                <a href="@Url.Action("IsDefault", "Home", new {id = item.Id , customerId =@Model.Model.Id})" class="btn btn-outline-info">
+                                    <i class="bi bi-x" style="margin-right: 5px"></i>
+                                    Optional
+
+                                </a>
+                            }
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+
+            </table>
+
+
+        </div>
+    </div>
+  
+</div>

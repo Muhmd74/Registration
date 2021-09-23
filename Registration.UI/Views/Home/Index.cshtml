@@ -1,0 +1,78 @@
+﻿@model Registration.Core.Common.Response.OutputResponse<IEnumerable<Customer>>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="text-center">
+    <h1 class="display-4">All Customer </h1>
+</div>
+<div class="mt-4">
+
+    @if (!Model.Model.Any())
+    {
+        <div class="alert alert-warning" role="alert">
+            No Products Found!
+        </div>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Mobile</th>
+                     <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Model.Any())
+                {
+                    <a class="alert alert-warning" role="alert">
+                        No Item Found!
+                    </a>
+                }
+                @foreach (var item in Model.Model)
+                {
+                    <tr>
+                        <td>
+
+                            @Html.ActionLink($"{item.FirstName} {item.LastName}", "Details", "Home"
+                                , new { id = item.Id })
+                        </td>
+                        <td>@item.Email</td>
+                        <td>@item.Gender</td>
+                        <td>@item.Mobile</td>
+                         <td>
+                             <a href="@Url.Action("Delete","Home",new {id = item.Id})" class="btn btn-outline-dark">
+                                 <i class="bi bi-pencil-square" style="margin-right: 5px"></i>
+                                 Delete
+                             </a>
+                            @if (item.IsActive)
+                            {
+                         <a href="@Url.Action("ChangeActivity", "Home", new {id = item.Id})" class="btn btn-success" style="margin-left: 4px">
+                             <i class="bi bi-skip-backward" style="margin-right: 5px"></i>
+                             Active
+                         </a>
+                            }
+                            else
+                            {
+                                
+                         <a href="@Url.Action("ChangeActivity", "Home", new {id = item.Id})" class="btn btn-danger">
+                             <i class="bi bi-x" style="margin-right: 5px"></i>
+                             Not Active
+
+                         </a>
+                            }
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    }
+
+</div>
