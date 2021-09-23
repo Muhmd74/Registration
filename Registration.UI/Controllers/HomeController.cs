@@ -32,6 +32,7 @@ namespace Registration.UI.Controllers
             {
                 return View(model);
             }
+
             return Json($"this Item NorFound ");
 
         }
@@ -46,12 +47,13 @@ namespace Registration.UI.Controllers
                 return RedirectToAction("Index");
 
             }
+
             return Json($"this Item NorFound ");
         }
 
         public async Task<IActionResult> Delete(Guid id)
         {
-            var entity =await _unitOfWork.Customers.GetById(id);
+            var entity = await _unitOfWork.Customers.GetById(id);
             var model = await _unitOfWork.Customers.Delete(entity.Model);
             if (model.Success)
             {
@@ -59,19 +61,47 @@ namespace Registration.UI.Controllers
                 return RedirectToAction("Index");
 
             }
+
             return Json($"this Item NorFound ");
         }
- 
-        public async Task<IActionResult> IsDefault(Guid id,Guid customerId)
+
+        public async Task<IActionResult> IsDefault(Guid id, Guid customerId)
         {
-            var model = await _unitOfWork.Addresses.IsDefault(id,customerId);
+            var model = await _unitOfWork.Addresses.IsDefault(id, customerId);
             if (model.Success)
             {
                 await _unitOfWork.CompleteAsync();
                 return RedirectToAction("Details");
 
             }
+
             return Json($"this Item NorFound ");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+
+            return View();
+        }
+
+        public async Task<IActionResult> Create(Customer entity)
+        {
+            if (!ModelState.IsValid)
+            {
+                await Create();
+            }
+
+            var model = await _unitOfWork.Customers.Add(entity);
+            if (model.Success)
+            {
+                await _unitOfWork.CompleteAsync();
+
+                return RedirectToAction("Index");
+            }
+
+            return Json($"this Item NorFound ");
+
         }
     }
 }

@@ -7,9 +7,16 @@
     <h1 class="display-4">All Customer </h1>
 </div>
 <div class="mt-4">
+    <a asp-action="Create" asp-controller="Home"
+       class="btn btn-primary mb-3" style="width:auto">
+        
+        Create
+
+    </a>
 
     @if (!Model.Model.Any())
     {
+      
         <div class="alert alert-warning" role="alert">
             No Products Found!
         </div>
